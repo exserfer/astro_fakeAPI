@@ -1,23 +1,14 @@
 import os.path
 import random
 import sys
-import json
-from turtle import mode
-from urllib.parse import urlparse
-from typing import Optional
 
 from datetime import datetime
 from pydantic import BaseModel
 import uvicorn
 
-from fastapi import FastAPI, Cookie, Request, Depends
+from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from fastapi.responses import RedirectResponse, JSONResponse, HTMLResponse
-from fastapi.encoders import jsonable_encoder
-from starlette.exceptions import HTTPException as StarletteHTTPException
-
-from sqlalchemy.orm import Session
 
 from v1.endpoints.astroapi.r_astroapi import router_astroapi
 

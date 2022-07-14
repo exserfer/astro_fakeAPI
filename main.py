@@ -1,8 +1,8 @@
 import os.path
 import random
 import sys
-
 from datetime import datetime
+
 from pydantic import BaseModel
 import uvicorn
 
@@ -25,9 +25,9 @@ templates = Jinja2Templates(directory="templates")
 app.include_router(router_astroapi) # Тарифы
 
 
-
 class Prediction(BaseModel):
-    ''' Класс с предсказанииями '''
+    """ Класс с предсказанииями
+    """
 
     random_string: str = None
     health: str = None
@@ -47,12 +47,14 @@ class PredictionFull(BaseModel):
 
 @app.get('/', tags=['Root'])
 async def root(request: Request):
-    return {"error": False, "msg": "Fake API for testing v.0.0.1", "random": random.random()}
+    return {"error": False, "msg": "Fake API for testing v.0.0.1",
+            "random": random.random()}
 
 
 @app.post('/test', tags=['Test'], response_model=PredictionFull)
 async def test(py_model: PredictionFull):
     return py_model
 
+
 if __name__ == '__main__':
-    uvicorn.run(app, host="127.0.0.1", port=4040)
+    uvicorn.run(app, host="127.0.0.1", port=4040, reload=True)
